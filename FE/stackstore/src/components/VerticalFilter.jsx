@@ -180,6 +180,7 @@ function VerticalFilter(props) {
               type="radio"
               name="price"
               min={10001}
+              max={0}
               onClick={(e) => {
                 priceHandler(e);
               }}

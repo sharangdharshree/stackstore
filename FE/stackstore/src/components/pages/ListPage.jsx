@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 function ListPage() {
   // filter options
 
-  const [category, setCategory] = useState([""]);
-  const [brand, setBrand] = useState([""]);
+  const [category, setCategory] = useState([]);
+  const [brand, setBrand] = useState([]);
   const [price, setPrice] = useState([0, 100]);
   const [rating, setRating] = useState(0);
   const [discount, setDiscount] = useState(0);
-  const [includeOutOfStock, setIncludeOutOfStock] = useState(true);
+  const [includeOutOfStock, setIncludeOutOfStock] = useState(false);
 
   //sort options
   const [sort, setSort] = useState("popularity");
@@ -20,7 +20,7 @@ function ListPage() {
 
   const displayResults = (
     <div className="results">
-      {dummyData.map((item) => {
+      {result.map((item) => {
         return <ProductCard key={item.id} product={item} />;
       })}
     </div>
@@ -28,18 +28,38 @@ function ListPage() {
 
   useEffect(() => {
     function resultList() {
-      const categoryResult = categoryresult(category);
-      const brandResult = brandresult(brand);
-      const priceResult = priceresult(price);
-      const ratingResult = ratingresult(rating);
-      const discountResult = discountresult(discount);
-      const includeOutOfStockResult =
-        includeoutofstockresult(includeOutOfStock);
-      console.log(categoryResult);
+      let dataSet = [...dummyData];
+      dataSet =
+        category.length > 0
+          ? dataSet.filter((d) => categoryresult(category).includes(d))
+          : dataSet.map((d) => d);
+      dataSet =
+        brand.length > 0
+          ? dataSet.filter((d) => brandresult(brand).includes(d))
+          : dataSet.map((d) => d);
+      dataSet =
+        price[0] > 0
+          ? dataSet.filter((d) => priceresult(price).includes(d))
+          : dataSet.map((d) => d);
+      dataSet =
+        rating > 0
+          ? dataSet.filter((d) => ratingresult(rating).includes(d))
+          : dataSet.map((d) => d);
+      dataSet =
+        discount > 0
+          ? dataSet.filter((d) => discountresult(discount).includes(d))
+          : dataSet.map((d) => d);
+      dataSet = includeOutOfStock
+        ? dataSet.filter((d) => includeoutofstockresult().includes(d))
+        : dataSet.filter((d) => d.inStock == true);
+
+      setResult(dataSet);
     }
 
     resultList();
   }, [category, brand, price, rating, discount, includeOutOfStock]);
+
+  console.log("re-render");
 
   return (
     <>
@@ -55,7 +75,6 @@ function ListPage() {
           setIncludeOutOfStock={setIncludeOutOfStock}
         />
         {displayResults}
-        {result}
       </div>
     </>
   );
@@ -78,41 +97,33 @@ function brandresult(brand) {
   for (let i = 0; i < brand.length; i++) {
     results = results.concat(dummyData.filter((d) => d.brand == brand[i]));
   }
+
   return results;
 }
 
 function priceresult(price) {
   let results = [];
-  results = results.concat(
-    dummyData.filter(
-      (d) => d.price.listprice >= price[0] && d.price.listprice <= price[1]
-    )
+  results = dummyData.filter(
+    (d) =>
+      d.price.listprice >= price[0] &&
+      (price[1] > 0 ? d.price.listprice <= price[1] : true)
   );
+
   return results;
 }
 
 function ratingresult(rating) {
   let results = [];
-  results = results.concat(dummyData.filter((d) => d.rating.rate >= rating));
+  results = dummyData.filter((d) => d.rating.rate >= rating);
   return results;
 }
 
 function discountresult(discount) {
   let results = [];
-  results = results.concat(
-    dummyData.filter((d) => d.price.discount >= discount)
-  );
+  results = dummyData.filter((d) => d.price.discount >= discount);
   return results;
 }
 
-function includeoutofstockresult(includeOutOfStock) {
-  let results = [];
-  if (includeOutOfStock) {
-    results = results.concat(
-      dummyData.filter((d) => d.inStock == true || d.inStock == false)
-    );
-  } else {
-    results = results.concat(dummyData.filter((d) => d.inStock == true));
-  }
-  return results;
+function includeoutofstockresult() {
+  return dummyData.map((d) => d);
 }
