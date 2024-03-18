@@ -1,4 +1,4 @@
-import ListPage from "./pages/ListPage.jsx";
+import ListPage from "./components/pages/ListPage.jsx";
 
 function App() {
   return (
