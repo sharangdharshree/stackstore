@@ -1,0 +1,8 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.829);
+  color: beige;
+  height: 50px;
+  width: 100vw;
+}

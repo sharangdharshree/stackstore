@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "./modules/ProductCard.module.css";
+import styles from "./../modules/ProductCard.module.css";
 
 function ProductCard(props) {
   const listprice = props.product.price.listprice;

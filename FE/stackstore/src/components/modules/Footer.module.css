@@ -1,0 +1,8 @@
+.footer {
+  background-color: rgba(144, 142, 138, 0.922);
+  display: flex;
+  justify-content: space-around;
+}
+a {
+  display: block;
+}

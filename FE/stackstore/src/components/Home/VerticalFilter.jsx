@@ -1,4 +1,4 @@
-import styles from "./modules/VerticalFilter.module.css";
+import styles from "./../modules/VerticalFilter.module.css";
 
 function VerticalFilter(props) {
   function categoryHandler(e) {

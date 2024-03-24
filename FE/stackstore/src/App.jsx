@@ -1,11 +1,5 @@
-import ListPage from "./components/pages/ListPage.jsx";
-
 function App() {
-  return (
-    <>
-      <ListPage />
-    </>
-  );
+  return <></>;
 }
 
 export default App;

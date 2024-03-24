@@ -1,6 +1,6 @@
-import ProductCard from "../ProductCard.jsx";
-import VerticalFilter from "../VerticalFilter.jsx";
-import dummyData from "../../data/dummyData.js";
+import ProductCard from "../components/Home/ProductCard.jsx";
+import VerticalFilter from "../components/Home/VerticalFilter.jsx";
+import dummyData from "../data/dummyData.js";
 import { useEffect, useState } from "react";
 
 function ListPage() {
