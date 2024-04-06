@@ -1,28 +1,31 @@
 import styles from "./../modules/Navbar.module.css";
 import React from "react";
+import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
     <header>
-      <nav className={styles.header}>
+      <nav className={styles.header} style={{ position: "sticky" }}>
         <span>
-          <button>Logo</button>
+          <button>
+            <NavLink to="/">Logo</NavLink>
+          </button>
         </span>
 
-        <span className={styles.categoryWrapper}>
-          <button>Category 1</button>
-          <button>Category 2</button>
-          <button>Category 3</button>
-          <button>Category 4</button>
-          <button>Category 5</button>
-        </span>
         <span>
           <input type="text" name="search" placeholder="Search" />
-          <button name="search">SL</button>
+          <button
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            name="search"
+          >
+            SL
+          </button>
         </span>
+
         <span>
-          <button>Profile</button>
-          <button>Wishlist</button>
-          <button>Cart</button>
+          <button>Profile/Login</button>|
+          <button>
+            <NavLink to="/checkout/cart">Cart</NavLink>
+          </button>
         </span>
       </nav>
     </header>

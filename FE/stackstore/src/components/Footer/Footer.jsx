@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./../modules/Footer.module.css";
 function Footer() {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className="about">
         <h5>ABOUT</h5>
         <a href="#">Contact Us</a>
@@ -28,7 +28,7 @@ function Footer() {
         <p>Some Logo here</p>
         <p>Some Logo here</p>
       </div>
-    </div>
+    </footer>
   );
 }
 

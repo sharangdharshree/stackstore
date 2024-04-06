@@ -2,10 +2,10 @@ import ProductCard from "../components/Home/ProductCard.jsx";
 import VerticalFilter from "../components/Home/VerticalFilter.jsx";
 import dummyData from "../data/dummyData.js";
 import { useEffect, useState } from "react";
+import styles from "./../components/modules/ListPage.module.css";
 
 function ListPage() {
   // filter options
-
   const [category, setCategory] = useState([]);
   const [brand, setBrand] = useState([]);
   const [price, setPrice] = useState([0, 100]);
@@ -14,17 +14,14 @@ function ListPage() {
   const [includeOutOfStock, setIncludeOutOfStock] = useState(false);
 
   //sort options
-  const [sort, setSort] = useState("popularity");
+  const [sort, setSort] = useState("bestselling");
 
+  function sortHandler(e) {
+    setSort(e.target.value);
+  }
+
+  // final results
   const [result, setResult] = useState([]);
-
-  const displayResults = (
-    <div className="results">
-      {result.map((item) => {
-        return <ProductCard key={item.id} product={item} />;
-      })}
-    </div>
-  );
 
   useEffect(() => {
     function resultList() {
@@ -59,11 +56,56 @@ function ListPage() {
     resultList();
   }, [category, brand, price, rating, discount, includeOutOfStock]);
 
-  console.log("re-render");
+  const displayResults = (
+    <div className={styles.result}>
+      {result
+        .sort((a, b) => {
+          switch (sort) {
+            case "bestselling":
+              return;
+
+            case "p-ascending":
+              return a.price.listprice - b.price.listprice;
+
+            case "p-descending":
+              return b.price.listprice - a.price.listprice;
+
+            case "rating":
+              return b.rating.rate - a.rating.rate;
+
+            case "new":
+              return;
+
+            default:
+              return;
+          }
+        })
+        .map((item) => {
+          return <ProductCard key={item.id} product={item} />;
+        })}
+    </div>
+  );
 
   return (
     <>
-      <div className="root">
+      <div style={{ display: "flex", justifyContent: "right" }}>
+        <label htmlFor="sort">Sort by:</label>
+        <select
+          name="sort"
+          id=""
+          onChange={(e) => {
+            sortHandler(e);
+          }}
+          value={sort}
+        >
+          <option value="bestselling">Bestselling</option>
+          <option value="p-ascending">Price: Low to High</option>
+          <option value="p-descending">Price: High to Low</option>
+          <option value="rating">Customer Rating</option>
+          <option value="new">New Arrivals</option>
+        </select>
+      </div>
+      <div className={styles.root}>
         <VerticalFilter
           category={category}
           setCategory={setCategory}

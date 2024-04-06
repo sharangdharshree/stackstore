@@ -1,0 +1,15 @@
+.cartbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+  padding: 50px;
+  height: 100vh;
+}
+
+.left {
+  width: 300px;
+}
+.right {
+  width: 300px;
+}
