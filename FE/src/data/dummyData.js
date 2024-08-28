@@ -343,3 +343,5 @@ const productDetailSchema = {
   image: "some-url",
   rating: { rate: 4.2, count: 1200 },
 };
+
+const Product = {};

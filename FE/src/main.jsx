@@ -10,15 +10,17 @@ import {
 } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import ListPage from "./pages/ListPage.jsx";
-import Home from "./components/Home/Home.jsx";
 import Cart from "./components/Checkout/Cart/Cart.jsx";
 import Address from "./components/Checkout/Address/Address.jsx";
 import Payment from "./components/Checkout/Payment/Payment.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/products" element={<ListPage />} />
       <Route path="/checkout/cart" element={<Cart />} />
       <Route path="/checkout/address" element={<Address />} />

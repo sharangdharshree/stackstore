@@ -1,8 +1,10 @@
-import ProductCard from "../components/Home/ProductCard.jsx";
+import ProductCard from "../components/Product/ProductCard.jsx";
 import VerticalFilter from "../components/Home/VerticalFilter.jsx";
 import dummyData from "../data/dummyData.js";
 import { useEffect, useState } from "react";
 import styles from "./../components/modules/ListPage.module.css";
+import { Link } from "react-router-dom";
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs.jsx";
 
 function ListPage() {
   // filter options
@@ -88,22 +90,25 @@ function ListPage() {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "right" }}>
-        <label htmlFor="sort">Sort by:</label>
-        <select
-          name="sort"
-          id=""
-          onChange={(e) => {
-            sortHandler(e);
-          }}
-          value={sort}
-        >
-          <option value="bestselling">Bestselling</option>
-          <option value="p-ascending">Price: Low to High</option>
-          <option value="p-descending">Price: High to Low</option>
-          <option value="rating">Customer Rating</option>
-          <option value="new">New Arrivals</option>
-        </select>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Breadcrumbs />
+        <div>
+          <label htmlFor="sort">Sort by:</label>
+          <select
+            name="sort"
+            id=""
+            onChange={(e) => {
+              sortHandler(e);
+            }}
+            value={sort}
+          >
+            <option value="bestselling">Bestselling</option>
+            <option value="p-ascending">Price: Low to High</option>
+            <option value="p-descending">Price: High to Low</option>
+            <option value="rating">Customer Rating</option>
+            <option value="new">New Arrivals</option>
+          </select>
+        </div>
       </div>
       <div className={styles.root}>
         <VerticalFilter
