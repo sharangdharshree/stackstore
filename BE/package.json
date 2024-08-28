@@ -1,0 +1,11 @@
+{
+  "name": "stackstore",
+  "version": "1.0.0",
+  "description": "one stop solution for all your supplementation needs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
